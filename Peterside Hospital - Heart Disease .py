@@ -260,7 +260,7 @@ df['label'] = df['target'].apply(label)
 # Total patient in each category
 print(df["label"].value_counts ())
 
-# To investigate the gender distribution of patients in each category of 'label'.
+# Investigate the gender distribution of patients in each category of 'label'.
 plt.figure(figsize = (10, 5))
 sns.countplot (x='label', data=df) 
 plt.xlabel('Target')
@@ -460,7 +460,7 @@ plt.title("Confusion Matrix")
 plt.show()
 
 
-# * The confusion matrix shows that out of the total 61 test cases, 24 were true positive and 29 were true negative. The model predicted 5 cases as positive which were actually negative (false positive), and 3 cases as negative which were actually positive (false negative).
+# * The confusion matrix shows that out of the total 61 test cases, 24 were true positive and 26 were true negative. The model predicted 5 cases as positive which were actually negative (false positive), and 6 cases as negative which were actually positive (false negative).
 # 
 
 # In[33]:
@@ -492,6 +492,7 @@ precision_list = {}
 recall_list = {}
 roc_list = {}
 cm_dict = {}
+f1_list = {}
 
 for classifier in classifiers:
     model = classifier[0]
@@ -504,11 +505,13 @@ for classifier in classifiers:
     p_score = precision_score(y_test, pred)
     r_score = recall_score(y_test, pred)
     roc_score = roc_auc_score(y_test, pred)
+    f1 = f1_score(y_test, pred)
     
     acc_list[model_name] = ([str(round (a_score*100, 2)) + '%'])
     precision_list[model_name] = ([str(round(p_score*100, 2)) + '%'])
     recall_list[model_name] = ([str(round(r_score*100, 2)) + '%'])
     roc_list[model_name] = ([str(round(roc_score*100, 2)) + '%'])
+    f1_list[model_name] = [str(round(f1*100, 2)) + '%']  
     
     cm = confusion_matrix(y_test, pred)
     cm_dict[model_name] = cm
@@ -558,11 +561,13 @@ s4. head()
 # In[41]:
 
 
+f1_list
+
+
+# In[42]:
+
+
 cm_dict
 
 
-# In[ ]:
-
-
-
-
+# * Based on the performance metrics, the SGD Classifier model outperformed the other models in terms of accuracy, precision, recall, and ROC score. Consequently, it can be concluded that the SGD Classifier model would be the most suitable option for predicting the probability of an individual having heart disease.
