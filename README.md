@@ -1,4 +1,4 @@
-# Heart-Disease-Predictions
+# Heart-Disease-Prediction
 
 ## The aim of this project is to build an ML model that can predict the likelihood of a person having a heart disease based on the given features.
 
